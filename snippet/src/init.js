@@ -1,5 +1,5 @@
 import Tracker from '@openreplay/tracker';
-
+import trackerAssist from '@openreplay/tracker-assist';
 
 export default function initTracker(argOptions = {}) {
   const stack = (window.OpenReplay || window.asayer);
@@ -60,6 +60,11 @@ export default function initTracker(argOptions = {}) {
       event(key, payload);
     }
   };
+  const assistOpts = stack.shift();
+  const useAssist = assistOpts.useAssist || false;
+  if (useAssist) {
+    openReplay.use(trackerAssist(assistOpts.options || {}));
+  }
   while (stack.length) {
     const s = stack.shift();
     switch (s[0]) {

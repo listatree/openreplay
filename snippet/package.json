@@ -4,15 +4,14 @@
   "description": "CDN wrapper for tracker",
   "scripts": {
     "prettier": "prettier --write index.js rollup.config.js $(git ls-files '*.js')",
-    "bundle": "rollup -c -i src/$0.js -o dist/$0.js",
-    "minify": "echo \"(function(){$(cat dist/$0.js)})()\" | ./node_modules/.bin/uglifyjs --compress --mangle --comments -o dist/$0.min.js",
-    "bundle:or": "yarn bundle tracker && yarn minify tracker",
-    "bundle:assist": "yarn bundle tracker-assist && yarn minify tracker-assist",
+    "bundle": "rollup -c -i src/tracker.js -o dist/tracker.js",
+    "minify": "echo \"(function(){$(cat dist/tracker.js)})()\" | ./node_modules/.bin/uglifyjs --compress --mangle --comments -o dist/tracker.min.js",
+    "bundle:minify": "yarn bundle && yarn minify",
     "update-version": "node scripts/upd_ver.js"
   },
   "dependencies": {
-    "@openreplay/tracker": "file:../tracker/tracker",
-    "@openreplay/tracker-assist": "file:../tracker/tracker-assist"
+    "@openreplay/tracker": "../tracker/tracker",
+    "@openreplay/tracker-assist": "../tracker/tracker-assist/"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
